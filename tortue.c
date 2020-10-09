@@ -44,35 +44,39 @@ void allezA(Tortue *tortue, float x, float y)
   tortue->y = y;
 }
 
+void koch(Tortue* T, float d, int k)
+{
+  if (k == 0)
+  {
+    affiche(*T);
+    avance(T, d / 3);
+    affiche(*T);
+  }
+  else
+  {
+    affiche(*T);
+    koch(T, d / 3, k-1);
+    affiche(*T);
+
+    tourneG(T, 60);
+    koch(T, d / 3, k-1);
+    affiche(*T);
+
+    tourneD(T, 120);
+    koch(T, d / 3, k-1);
+    affiche(*T);
+
+    tourneG(T, 60);
+    koch(T, d / 3, k-1);
+    affiche(*T);
+  }
+}
+
 int main()
 {
   Tortue T;
   init(&T);
   affiche(T);
 
-  avance(&T, 100);
-  tourneG(&T, 90);
-  affiche(T);
-
-  avance(&T, 80);
-  tourneG(&T, 90);
-  affiche(T);
-
-  avance(&T, 100);
-  tourneG(&T, 90);
-  affiche(T);
-
-  avance(&T, 80);
-  tourneG(&T, 180);
-  affiche(T);
-
-  avance(&T, 80);
-  affiche(T);
-  tourneD(&T, 30);
-  avance(&T, 100);
-  tourneD(&T, 120);
-  affiche(T);
-
-  avance(&T, 100);
-  affiche(T);
+  koch(&T, 100,  10);
 }
